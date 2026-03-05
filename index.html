@@ -1,6 +1,20 @@
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
 
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <style>
+  @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
   .msn-wrapper {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 1200px;
@@ -13,13 +27,40 @@
 
   /* ── HERO ── */
   .msn-hero {
-    background: linear-gradient(135deg, #003865 0%, #00A3E0 60%, #0072C6 100%);
-    color: white;
-    padding: 50px 40px;
-    text-align: center;
     position: relative;
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
     overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+  /* Background image layer - YOUR SHAREPOINT IMAGE */
+  .msn-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://microncorp-my.sharepoint.com/:i:/g/personal/sborbhuiyan_micron_com/IQAfbCOXK9XJSaKsvjvlf-jfAc6YeojsvV3Al2xXEQNvn9U?e=S3HKGM&download=1');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  /* ✅ REDUCED overlay opacity so image is much more visible */
+  .msn-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+      rgba(0, 56, 101, 0.40) 0%,
+      rgba(0, 114, 198, 0.30) 60%,
+      rgba(0, 163, 224, 0.25) 100%);
+    z-index: 1;
+  }
+
+  /* Animated pulse glow */
   .msn-hero::before {
     content: '';
     position: absolute;
@@ -27,17 +68,42 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
     animation: pulse 6s ease-in-out infinite;
+    z-index: 2;
   }
+
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
   }
+
+  /* All hero content sits above overlays */
+  .msn-hero-content {
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Top-left alias badge */
+  .msn-alias-top-left {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 4;
+    background: rgba(0, 0, 0, 0.40);
+    padding: 7px 14px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
   .msn-hero-badge {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.20);
+    border: 1px solid rgba(255,255,255,0.4);
     border-radius: 20px;
     padding: 6px 18px;
     font-size: 12px;
@@ -47,43 +113,26 @@
     margin-bottom: 16px;
     backdrop-filter: blur(10px);
   }
+
   .msn-hero h1 {
     font-size: 42px;
     font-weight: 700;
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     letter-spacing: -0.5px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 14px rgba(0,0,0,0.6);
   }
+
   .msn-hero h1 span {
     color: #7FD4F5;
   }
+
   .msn-hero p {
     font-size: 17px;
-    opacity: 0.9;
-    margin: 0 0 28px 0;
+    opacity: 0.95;
+    margin: 0 auto;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.6;
-  }
-  .msn-hero-btn {
-    display: inline-block;
-    background: white;
-    color: #003865;
-    padding: 14px 36px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-  }
-  .msn-hero-btn:hover {
-    background: #7FD4F5;
-    color: #003865;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
   }
 
   /* ── STATS BAR ── */
@@ -102,7 +151,7 @@
   }
   .msn-stat:last-child { border-right: none; }
   .msn-stat-num {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
     color: #7FD4F5;
     display: block;
@@ -213,25 +262,26 @@
     .msn-hero h1 { font-size: 28px; }
     .msn-stats { flex-wrap: wrap; }
     .msn-stat { flex: 1 1 50%; }
+    .msn-alias-top-left { font-size: 11px; top: 10px; left: 10px; }
   }
 </style>
 
 <div class="msn-wrapper">
 
-  <!-- HERO -->
+  <!-- HERO BANNER WITH SHAREPOINT IMAGE -->
   <div class="msn-hero">
-    <div class="msn-hero-badge">🧠 Micron Internal Network</div>
-    <h1>Micron Strategy <span>Network</span></h1>
-    <p>An open forum where diverse perspectives meet to shape Micron's future — collaborating across tracks to decode trends and influence strategy.</p>
-    <a href="http://msn/" class="msn-hero-btn">🚀 Join the Network →</a>
+    <div class="msn-hero-bg"></div>
+    <div class="msn-hero-overlay"></div>
+    <div class="msn-alias-top-left">📎 Alias: /msn</div>
+    <div class="msn-hero-content">
+      <div class="msn-hero-badge">🧠 Micron Internal Network</div>
+      <h1>Micron Strategy <span>Network</span></h1>
+      <p>An open forum where diverse perspectives meet to shape Micron's future — collaborating across tracks to decode trends and influence strategy.</p>
+    </div>
   </div>
 
   <!-- STATS BAR -->
   <div class="msn-stats">
-    <div class="msn-stat">
-      <span class="msn-stat-num">14+</span>
-      <span class="msn-stat-label">Sessions Held</span>
-    </div>
     <div class="msn-stat">
       <span class="msn-stat-num">Every 2 Weeks</span>
       <span class="msn-stat-label">Meeting Cadence</span>
@@ -248,8 +298,6 @@
 
   <!-- CARDS -->
   <div class="msn-cards">
-
-    <!-- Card 1 -->
     <div class="msn-card">
       <span class="msn-card-icon">⚙️</span>
       <h3>How Does MSN Work?</h3>
@@ -262,8 +310,6 @@
         <li>Occasional invited guest talks</li>
       </ul>
     </div>
-
-    <!-- Card 2 -->
     <div class="msn-card">
       <span class="msn-card-icon">🌟</span>
       <h3>Why Participate?</h3>
@@ -276,8 +322,6 @@
         <li>MSN topics feed into future CSR (Corporate Strategic Review)</li>
       </ul>
     </div>
-
-    <!-- Card 3 -->
     <div class="msn-card">
       <span class="msn-card-icon">🔗</span>
       <h3>Quick Access</h3>
@@ -287,16 +331,21 @@
         <li>Access all session summaries & recordings below</li>
         <li>Login using SSO for full access</li>
       </ul>
-      <a href="http://msn/" class="msn-link">🌐 MSN Alias Portal → http://msn/</a>
+      <a href="http://msn/" class="msn-link">🌐 Visit MSN Portal → http://msn/</a>
     </div>
-
   </div>
 
   <!-- FOOTER -->
   <div class="msn-footer">
     <span>© Micron Strategy Network — Internal Use Only</span>
     <span>📅 Meets every other Friday via Zoom</span>
-    <span>🔗 Alias: <a href="http://msn/">http://msn/</a></span>
   </div>
 
 </div>
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
